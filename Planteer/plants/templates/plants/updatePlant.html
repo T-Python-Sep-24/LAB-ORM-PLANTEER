@@ -8,7 +8,7 @@
 <section class="container-md text-center f-quantico">
     <h1
         class="m-4 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {%else %} lighttext {% endif %}">
-        Update </h1>
+        Update Plant</h1>
     <div class="row justify-content-center">
         <div
             class="col-6 shadow rounded-5 py-3 px-4 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark darktext {% else %} bg-light lighttext {% endif %} opacity-90">
@@ -79,10 +79,12 @@
                     </div>
                 </div>
 
-                <button
-                    class="btn border-2 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} btn-outline-light {% else %} btn-outline-dark {% endif %}"
-                    type="submit">Add
-                </button>
+                <div class="d-flex flex-row justify-content-center">
+                    <button
+                        class="col-6 btn border-2 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} btn-outline-light {% else %} btn-outline-dark {% endif %}"
+                        type="submit">Update
+                    </button>
+                </div>
             </form>
         </div>
     </div>

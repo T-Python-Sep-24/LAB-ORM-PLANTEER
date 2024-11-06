@@ -19,7 +19,7 @@
 }
 
 .lighttext {
-    color: rgb(82, 95, 60);
+    color: rgb(70, 81, 50);
 }
 
 .darktext {
@@ -84,4 +84,30 @@
 
 .opacity-90 {
     opacity: 0.9;
+}
+
+/* Category tags styling */
+.herbs-tag {
+    background: rgba(144, 207, 108, 0.5);
+    border: solid 2px rgb(144, 207, 108);
+}
+
+.shrubs-tag {
+    background: rgba(196, 207, 108, 0.5);
+    border: solid 2px rgb(196, 207, 108);
+}
+
+.trees-tag {
+    background: rgba(167, 136, 85, 0.5);
+    border: solid 2px rgb(167, 136, 85);
+}
+
+.creepers-tag {
+    background: rgba(72, 140, 71, 0.5);
+    border: solid 2px rgb(72, 140, 71);
+}
+
+.climbers-tag {
+    background: rgba(217, 202, 101, 0.5);
+    border: solid 2px rgb(217, 202, 101);
 }

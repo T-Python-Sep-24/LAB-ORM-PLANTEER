@@ -30,7 +30,8 @@ def plantDetailsView(request: HttpRequest, plantid:int):
     except Exception:
         response = redirect('main:notFoundView')
     else:
-        response = render(request, 'plants/plantDetails.html', context={"plant":plant})
+        similarPlants = Plant.objects.filter(category=plant.category)
+        response = render(request, 'plants/plantDetails.html', context={"plant":plant, "similarPlants": similarPlants})
     
     return response
 

@@ -5,8 +5,52 @@
 
 {% block content %}
 
-<section>
-
+<section class="container-lg my-5 p-0 text-center f-quantico">
+    <div class="row row-cols-1 row-cols-md-2 justify-content-center">
+        <div class="col col-md-6 col-lg-5">
+            <img src="{{plant.image.url}}" class="w-100 h-100 object-fit-cover rounded-3 shadow" />
+        </div>
+        <div class="col col-md-6 col-lg-5 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">
+            <div
+                class="d-flex flex-column text-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
+                <h2 class="fw-semibold"> {{plant.name}} </h2>
+                <p class="col-2 {{plant.category}}-tag rounded-pill border-2 text-center">{{plant.category}}</p>
+                <p class="fw-medium fs-5">About: 
+                    <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{{plant.about}}</span>
+                </p>
+                <p class="fw-medium fs-5">Uses: 
+                    <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{{plant.usedFor}}</span>
+                </p>
+                <p class="fw-medium fs-5">Edible: 
+                    <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{% if plant.isEdible %} Yes {% else %} No {% endif %} </span>
+                </p>
+                <p class="fw-medium fs-5">Date added: 
+                    <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{{plant.createdAt}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Related plants -->
+<section class="container f-quantico">
+    <h2 class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}" >
+        Similar plants:
+    </h2>
+    <div class="row mt-2 row-cols-1 row-cols-md-3 g-4">
+        {% for similar in similarPlants %}
+            {% if plant.name != similar.name %}
+            <div class="col {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
+                <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
+                    <img src="{{similar.image.url}}" class="w-100 h-image object-fit-cover rounded-3" />
+                    <a href="{% url 'plants:plantDetailsView' plant.id %}" class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">
+                        <h4>{{similar.name}}</h4>
+                    </a>
+                    <p class="small">{{similar.about}}</p>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </section>
 
 {% endblock %}
