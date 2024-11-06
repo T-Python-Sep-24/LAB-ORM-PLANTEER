@@ -11,44 +11,83 @@
             <img src="{{plant.image.url}}" class="w-100 h-100 object-fit-cover rounded-3 shadow" />
         </div>
         <div class="col col-md-6 col-lg-5 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">
-            <div
-                class="d-flex flex-column text-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
+            <div class="d-flex flex-column text-start h-100 p-4 shadow gap-1 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
                 <h2 class="fw-semibold"> {{plant.name}} </h2>
-                <p class="col-2 {{plant.category}}-tag rounded-pill border-2 text-center">{{plant.category}}</p>
-                <p class="fw-medium fs-5">About: 
+                <p class="{{plant.category}}-tag rounded-4 border-2 text-center w-25">{{plant.category}}</p>
+                <p class="fw-medium fs-5">About:
                     <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{{plant.about}}</span>
                 </p>
-                <p class="fw-medium fs-5">Uses: 
+                <p class="fw-medium fs-5">Uses:
                     <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{{plant.usedFor}}</span>
                 </p>
-                <p class="fw-medium fs-5">Edible: 
-                    <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{% if plant.isEdible %} Yes {% else %} No {% endif %} </span>
+                <p class="fw-medium fs-5">Edible:
+                    <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
+                        {% if plant.isEdible %} Yes {% else %} No {% endif %} </span>
                 </p>
-                <p class="fw-medium fs-5">Date added: 
+                <p class="fw-medium fs-5">Date added:
                     <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{{plant.createdAt}}</span>
                 </p>
+                <div class="d-flex flex-row justify-content-evenly">
+                    <a href="{% url 'plants:updatePlantView' plant.id %}" class="col-4 btn border-2 shadow-sm {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} btn-outline-light {% else %} btn-outline-dark {% endif %}">
+                        Update
+                    </a>
+                    <!-- Button to trigger delete modal -->
+                    <button type="button" class="col-4 btn btn-outline-danger shadow" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">
+                        Delete
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Post</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this post?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary shadow"
+                    data-bs-dismiss="modal">Close</button>
+                <a href="{% url 'plants:deletePlantView' plant.id %}" class="btn btn-danger shadow">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Related plants -->
 <section class="container f-quantico">
-    <h2 class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}" >
+    <h2
+        class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
         Similar plants:
     </h2>
     <div class="row mt-2 row-cols-1 row-cols-md-3 g-4">
         {% for similar in similarPlants %}
-            {% if plant.name != similar.name %}
-            <div class="col {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
-                <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
-                    <img src="{{similar.image.url}}" class="w-100 h-image object-fit-cover rounded-3" />
-                    <a href="{% url 'plants:plantDetailsView' plant.id %}" class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">
-                        <h4>{{similar.name}}</h4>
-                    </a>
-                    <p class="small">{{similar.about}}</p>
-                </div>
+        {% if plant.name != similar.name %}
+        <div
+            class="col {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
+            <div
+                class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
+                <img src="{{similar.image.url}}" class="w-100 h-image object-fit-cover rounded-3" />
+                <a href="{% url 'plants:plantDetailsView' plant.id %}"
+                    class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">
+                    <h4
+                        class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">
+                        {{similar.name}}</h4>
+                </a>
+                <a href=""
+                    class="{{similar.category}}-tag rounded-4 border-2 text-center text-decoration-none px-3{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}">{{similar.category}}</a>
+                <p class="small">{{similar.about}}</p>
             </div>
-            {% endif %}
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
 </section>

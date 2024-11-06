@@ -44,14 +44,14 @@ def updatePlantView(request: HttpRequest, plantid:int):
         response = redirect('main:notFoundView')
     else:
 
-        response = render(request, 'plant/updatePlant.html', context={"plant":plant, "categories":Plant.Categories.choices})
+        response = render(request, 'plants/updatePlant.html', context={"plant":plant, "categories":Plant.Categories.choices})
         if request.method == "POST":
             #Update existing plant
             plantData = PlantForm(request.POST, request.FILES, instance=plant)
             if plantData.is_valid():
                 plantData.save()
-
-            response = redirect('plant:plantDetailsView', plantid=plant.id)
+            print(plantData.errors)
+            response = redirect('plants:plantDetailsView', plantid=plant.id)
 
     return response
 

@@ -43,8 +43,9 @@
             <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
                 <img src="{{plant.image.url}}" class="w-100 h-image object-fit-cover rounded-3" />
                 <a href="{% url 'plants:plantDetailsView' plant.id %}" class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">
-                    <h4>{{plant.name}}</h4>
+                    <h4 class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">{{plant.name}}</h4>
                 </a>
+                <a href="" class="{{plant.category}}-tag rounded-4 border-2 text-center text-decoration-none px-3{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}">{{plant.category}}</a>
                 <p class="small">{{plant.about}}</p>
             </div>
         </div>
