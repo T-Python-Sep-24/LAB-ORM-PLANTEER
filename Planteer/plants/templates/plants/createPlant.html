@@ -1,0 +1,91 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Add Plant{% endblock %}
+
+{% block content %}
+
+<section class="container-md text-center f-quantico">
+    <h1
+        class="m-4 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {%else %} lighttext {% endif %}">
+        Add Plant </h1>
+    <div class="row justify-content-center">
+        <div
+            class="col-6 shadow rounded-5 py-3 px-4 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark darktext {% else %} bg-light lighttext {% endif %} opacity-90">
+            <form class="form-floating d-flex flex-column gap-2 mt-3 px-2 needs-validation"
+                action="{% url 'plants:newPlantView' %}" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <span class="material-symbols-outlined rounded-pill p-2">
+                    psychiatry
+                </span>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control focus-ring focus-ring-success" placeholder="Name.."
+                        name="name" id="floatingName" required minlength="4" maxlength="256">
+                    <label for="floatingName" class="lighttext">Name</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid plant name.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control focus-ring focus-ring-success" placeholder="About the plant.."
+                        name="about" id="floatingAbout" style="height: 100px" required></textarea>
+                    <label for="floatingAbout" class="lighttext">About the plant</label>
+                    <div class="invalid-feedback">
+                        Please write description about the plant.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control focus-ring focus-ring-success" placeholder="What is it used for?"
+                        name="usedFor" id="floatingUsedFor" style="height: 100px" required></textarea>
+                    <label for="floatingUsedFor" class="lighttext">Used for</label>
+                    <div class="invalid-feedback">
+                        Please write what it's used for.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select focus-ring focus-ring-success" id="floatingSelect" name="category"
+                        required>
+                        <option selected disabled value="">Choose..</option>
+                        {% for value, label in categories %}
+                        <option value="{{value}}">{{label}}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="floatingSelect">Category</label>
+                    <div class="invalid-feedback">
+                        Please select a valid category.
+                    </div>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="formFile" class="form-label">Upload a picture</label>
+                    <input class="form-control border-2 focus-ring focus-ring-success" type="file" name="image"
+                        id="formFile" accept="image/*" required>
+                    <div class="invalid-feedback">
+                        Please provide an image for the plant.
+                    </div>
+                </div>
+                <div class="d-flex flex-row justify-content-evenly">
+                    <div class="form-check">
+                        <input class="form-check-input focus-ring focus-ring-success" type="radio" name="isEdible"
+                            id="edible" value="true" required>
+                        <label class="form-check-label" for="edible">Edible</label>
+                        <div class="invalid-feedback">
+                            Please choose one
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input focus-ring focus-ring-success" type="radio" name="isEdible"
+                            id="notEdible" value="false" required>
+                        <label class="form-check-label" for="notEdible">Not edible</label>
+                    </div>
+                </div>
+
+                <button
+                    class="btn border-2 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} btn-outline-light {% else %} btn-outline-dark {% endif %}"
+                    type="submit">Add
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

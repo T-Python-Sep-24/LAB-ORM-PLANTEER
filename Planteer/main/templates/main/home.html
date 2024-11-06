@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block intro %}
+
+<section
+    class="container introimg my-3 py-3 px-0 rounded-5 shadow justify-content-center text-center align-content-center titlecolor">
+    <div class="container-fluid welcomebg">
+        <h1 class="f-quantico pt-3">Welcome to <span class="f-jockey">Planteer</span></h1>
+        <h3 class="f-quantico pb-3">A Database for Plant Lovers!</h3>
+        <!-- Search bar -->
+        <form role="search" method="get" action="{% url 'plants:searchPlantsView' %}" class="pb-4 needs-validation"
+            novalidate>
+            <div class="input-group justify-content-center">
+                <input class="form-control focus-ring focus-ring-success rounded-start-4" style="max-width: 400px;"
+                    type="search" placeholder="Search" aria-label="Search" name="search" value="{{request.GET.search}}"
+                    required minlength="3">
+                <button class="btn btn-outline-dark rounded-end-4" type="submit">Search</button>
+                <div class="invalid-feedback">
+                    Please enter more than 3 letters.
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="container f-quantico">
+    <div class="d-flex flex-row justify-content-between">
+        <a href="{% url 'plants:plantsDisplayView' 'all' %}" class="fs-1 fw-semibold {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">Plants</a>
+        <a href="{% url 'plants:plantsDisplayView' 'all' %}" class="fs-3 align-self-center {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">More 
+            <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+    </div>
+    <div class="row mt-2 row-cols-1 row-cols-md-3 g-4">
+        {% for plant in plants %}
+        <div class="col {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
+            <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
+                <img src="{{plant.image.url}}" class="w-100 h-image object-fit-cover rounded-3" />
+                <a href="{% url 'plants:plantDetailsView' plant.id %}" class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">
+                    <h4>{{plant.name}}</h4>
+                </a>
+                <p class="small">{{plant.about}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

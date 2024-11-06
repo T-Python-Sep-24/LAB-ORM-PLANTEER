@@ -1,0 +1,87 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Concert+One&family=Jockey+One&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Base Styling */
+.f-jockey{
+    font-family: 'Jockey One', sans-serif;
+}
+
+.f-quantico {
+    font-family: 'Quantico', sans-serif;
+}
+
+.lightbody {
+    background-image: linear-gradient(rgb(201, 219, 174), rgb(137, 157, 108));
+}
+
+.darkbody {
+    background-image: linear-gradient(rgb(102, 118, 77), rgb(59, 73, 39));
+}
+
+.lighttext {
+    color: rgb(82, 95, 60);
+}
+
+.darktext {
+    color: rgb(187, 205, 159);
+}
+
+.lightlinks {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: rgb(82, 95, 60);
+}
+
+.darklinks {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: rgb(187, 205, 159);
+}
+
+.lightlinks:hover,
+.darklinks:hover {
+    transform: scale(1.1);
+    font-size: 1.3em;
+    transition: all 0.2s;
+}
+
+.activeicondark {
+    background: rgba(77, 88, 60, 0.5);
+    color: rgb(187, 205, 159);
+}
+
+.activeiconlight {
+    background-color: rgba(187, 205, 159, 0.5);
+    color: rgb(100, 115, 78);
+}
+
+.logohover:hover {
+    opacity: 0.8;
+    font-size: 1.7em;
+    transition: all 0.3s;
+}
+
+/* Home Styling */
+.introimg {
+    background-image: url('../images/pic2.jpg');
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    min-height: 80%;
+}
+
+.titlecolor {
+    color: rgb(48, 57, 28);
+}
+
+.welcomebg {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.h-image{
+    height: 250px;   
+}
+
+.opacity-90 {
+    opacity: 0.9;
+}
