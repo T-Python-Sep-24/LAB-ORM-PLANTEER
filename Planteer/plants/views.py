@@ -71,8 +71,10 @@ def deletePlantView(request: HttpRequest, plantid:int):
 def plantsDisplayView(request: HttpRequest, filterBy):
 
     plants = Plant.objects.filter(category=filterBy).order_by('createdAt') if filterBy != "all" else Plant.objects.all().order_by('createdAt')
-    if "isEdible" in request.GET:
-        plants = plants.filter(isEdible=request.GET['isEdible'])
+    if "isEdible" in request.GET and request.GET["isEdible"] == "true":
+        plants = plants.filter(isEdible=True)
+    elif "isEdible" in request.GET and request.GET["isEdible"] == "false":
+        plants = plants.filter(isEdible=False)
 
     response = render(request, 'plants/allPlants.html', context={'plants': plants, 'categories': Plant.Categories.choices, 'selected': filterBy})
     return response
@@ -81,7 +83,13 @@ def searchPlantsView(request:HttpRequest):
 
     if "search" in request.GET and len(request.GET["search"]) >= 3:
         plants = Plant.objects.filter(name__contains=request.GET["search"])
+        if "category" in request.GET:
+            plants = plants.filter(category=request.GET['category'])
+        if "isEdible" in request.GET and request.GET["isEdible"] == "true":
+            plants = plants.filter(isEdible=True)
+        elif "isEdible" in request.GET and request.GET["isEdible"] == "false":
+            plants = plants.filter(isEdible=False)
     else:
         plants = []
 
-    return render(request, "plants/searchPlants.html", {"plants" : plants})
+    return render(request, "plants/searchPlants.html", {"plants" : plants, 'categories': Plant.Categories.choices})

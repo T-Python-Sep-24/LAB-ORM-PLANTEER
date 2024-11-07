@@ -46,7 +46,7 @@
                     <h4 class="f-jockey {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">{{plant.name}}</h4>
                 </a>
                 <a href="{% url 'plants:plantsDisplayView' plant.category %}" class="{{plant.category}}-tag rounded-4 border-2 text-center text-decoration-none px-3{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}">{{plant.category}}</a>
-                <p class="small">{{plant.about}}</p>
+                <p class="small text-start">{{plant.about}}</p>
             </div>
         </div>
         {% endfor %}

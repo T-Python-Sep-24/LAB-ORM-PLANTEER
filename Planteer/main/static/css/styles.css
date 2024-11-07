@@ -90,6 +90,10 @@
     max-height: 200px;
 }
 
+.h-col {
+    max-height: 75%;
+}
+
 /* Category tags styling */
 
 .tag {

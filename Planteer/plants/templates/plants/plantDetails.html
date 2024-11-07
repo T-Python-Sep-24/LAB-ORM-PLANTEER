@@ -6,11 +6,11 @@
 {% block content %}
 
 <section class="container-lg my-5 p-0 text-center f-ubuntu">
-    <div class="row row-cols-1 row-cols-md-2 justify-content-center">
-        <div class="col col-md-6 col-lg-5">
+    <div class="row row-cols-1 row-cols-md-2 justify-content-center gap-3">
+        <div class="col col-md-6 col-lg-5 h-col">
             <img src="{{plant.image.url}}" class="w-100 h-100 object-fit-cover rounded-3 shadow" />
         </div>
-        <div class="col col-md-6 col-lg-5 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">
+        <div class="col col-md-6 col-lg-5 h-col{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">
             <div class="d-flex flex-column text-start h-100 p-4 shadow gap-1 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
                 <h2 class="fw-semibold f-jockey"> {{plant.name}} </h2>
                 <p class="{{plant.category}}-tag rounded-4 border-2 text-center w-25">{{plant.category}}</p>
@@ -71,20 +71,17 @@
     <div class="row mt-2 row-cols-1 row-cols-md-3 g-4">
         {% for similar in similarPlants %}
         {% if plant.name != similar.name %}
-        <div
-            class="col {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
-            <div
-                class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
+        <div class="col {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
+            <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
                 <img src="{{similar.image.url}}" class="w-100 h-image object-fit-cover rounded-3" />
-                <a href="{% url 'plants:plantDetailsView' plant.id %}"
+                <a href="{% url 'plants:plantDetailsView' similar.id %}"
                     class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">
-                    <h4
-                        class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">
+                    <h4 class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">
                         {{similar.name}}</h4>
                 </a>
-                <a href=""
+                <a href="{% url 'plants:plantsDisplayView' similar.category %}"
                     class="{{similar.category}}-tag rounded-4 border-2 text-center text-decoration-none px-3{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}">{{similar.category}}</a>
-                <p class="small">{{similar.about}}</p>
+                <p class="small text-start">{{similar.about}}</p>
             </div>
         </div>
         {% endif %}
