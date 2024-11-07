@@ -139,3 +139,35 @@
 .filter-light{
     filter: invert(28%) sepia(21%) saturate(718%) hue-rotate(40deg) brightness(94%) contrast(89%);
 }
+
+/* 404 styling */
+.four {
+    fill: none;
+    stroke: rgb(148, 167, 118);
+    stroke-width: 12;
+    stroke-dasharray: 200 100;
+}
+
+.zero {
+    fill: none;
+    stroke: rgb(148, 167, 118);
+    stroke-width: 12;
+    stroke-dasharray: 200 100;
+}
+
+.animate {
+    -webkit-animation: swirls 2s linear infinite;
+    -moz-animation: swirls 2s linear infinite;
+    -o-animation: swirls 2s linear infinite;
+    animation: swirls 2s linear infinite;
+}
+
+@keyframes swirls {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: 300;
+    }
+}
