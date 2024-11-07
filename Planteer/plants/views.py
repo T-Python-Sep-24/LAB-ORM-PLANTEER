@@ -16,7 +16,7 @@ def newPlantView(request:HttpRequest):
         if plantData.is_valid():
             plantData.save()
             
-        response = redirect('main:homeView')
+        response = redirect('main:plantsDisplayView' 'all')
 
     return response
 
@@ -27,7 +27,7 @@ def plantDetailsView(request: HttpRequest, plantid:int):
     try:
         plant = Plant.objects.get(pk=plantid)
     except Exception:
-        response = redirect('main:notFoundView')
+        response = render(request, '404.html')
     else:
         similarPlants = Plant.objects.filter(category=plant.category)
         response = render(request, 'plants/plantDetails.html', context={"plant":plant, "similarPlants": similarPlants})
@@ -40,7 +40,7 @@ def updatePlantView(request: HttpRequest, plantid:int):
     try:
         plant = Plant.objects.get(pk=plantid)
     except Exception:
-        response = redirect('main:notFoundView')
+        response = render(request, '404.html')
     else:
 
         response = render(request, 'plants/updatePlant.html', context={"plant":plant, "categories":Plant.Categories.choices})
@@ -60,7 +60,7 @@ def deletePlantView(request: HttpRequest, plantid:int):
     try:
         plant = Plant.objects.get(pk=plantid)
     except Exception:
-        response = redirect('main:notFoundView')
+        response = render(request, '404.html')
     else:
         plant.delete()
         response = redirect('main:homeView')

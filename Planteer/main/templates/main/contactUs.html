@@ -11,12 +11,15 @@
     </h1>
     <div class="row row-cols-1 row-cols-md-2 justify-content-between g-5">
         <div class="col col-md-6 shadow rounded-3 py-3 px-4 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark darktext {% else %} bg-light lighttext {% endif %} opacity-90">
+            <span class="material-symbols-outlined p-2">
+                    chat
+            </span>
+            {% if request.method == 'POST' %}
+            <h2 class="p-2 m-2 py-lg-5 m-lg-5" >We recieved your message successfully</h2>
+            {% else %}
             <form class="form-floating gap-2 mt-3 px-2 needs-validation text-center" action="{% url 'main:contactView' %}"
                 method="post" novalidate>
                 {% csrf_token %}
-                <span class="material-symbols-outlined p-2">
-                    chat
-                </span>
                 <p>
                     Please write your message, and we will contact you as soon as possible.
                 </p>
@@ -62,7 +65,9 @@
                     </button>
                 </div>
             </form>
+            {% endif %}
         </div>
+        
         <div class="col col-md-6">
             <img src="{% static 'images/intropic.jpg' %}" class="w-100 h-100 object-fit-cover rounded-3 shadow" />
         </div>

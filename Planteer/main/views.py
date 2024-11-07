@@ -18,11 +18,11 @@ def contactView(request: HttpRequest):
     response = render(request, 'main/contactUs.html')
     
     if request.method == "POST":
+
         contactData = ContactForm(request.POST)
         if contactData.is_valid():
             contactData.save()
-
-        response = redirect('main:homeView') 
+ 
 
     return response
 
@@ -43,8 +43,3 @@ def modeView(request: HttpRequest, mode):
         response.set_cookie("mode", "dark")
         
     return response
-
-#Handling wrong entry
-def notFoundView(request: HttpRequest):
-    
-    return render(request, '404.html')
