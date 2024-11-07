@@ -5,14 +5,14 @@
 
 {% block content %}
 
-<section class="container-lg my-5 p-0 text-center f-quantico">
+<section class="container-lg my-5 p-0 text-center f-ubuntu">
     <div class="row row-cols-1 row-cols-md-2 justify-content-center">
         <div class="col col-md-6 col-lg-5">
             <img src="{{plant.image.url}}" class="w-100 h-100 object-fit-cover rounded-3 shadow" />
         </div>
         <div class="col col-md-6 col-lg-5 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">
             <div class="d-flex flex-column text-start h-100 p-4 shadow gap-1 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
-                <h2 class="fw-semibold"> {{plant.name}} </h2>
+                <h2 class="fw-semibold f-jockey"> {{plant.name}} </h2>
                 <p class="{{plant.category}}-tag rounded-4 border-2 text-center w-25">{{plant.category}}</p>
                 <p class="fw-medium fs-5">About:
                     <span class="fw-normal fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">{{plant.about}}</span>
@@ -63,9 +63,9 @@
 </div>
 
 <!-- Related plants -->
-<section class="container f-quantico">
+<section class="container f-ubuntu">
     <h2
-        class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
+        class="f-jockey {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
         Similar plants:
     </h2>
     <div class="row mt-2 row-cols-1 row-cols-md-3 g-4">

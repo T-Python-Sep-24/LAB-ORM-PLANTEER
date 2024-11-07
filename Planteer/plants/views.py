@@ -72,15 +72,15 @@ def plantsDisplayView(request: HttpRequest, filterBy):
 
     plants = Plant.objects.filter(category=filterBy).order_by('createdAt') if filterBy != "all" else Plant.objects.all().order_by('createdAt')
     if "isEdible" in request.GET:
-        plants = plants.filter()
-    
+        plants = plants.filter(isEdible=request.GET['isEdible'])
+
     response = render(request, 'plants/allPlants.html', context={'plants': plants, 'categories': Plant.Categories.choices, 'selected': filterBy})
     return response
 
 def searchPlantsView(request:HttpRequest):
 
     if "search" in request.GET and len(request.GET["search"]) >= 3:
-        plants = Plant.objects.filter(title__contains=request.GET["search"])
+        plants = Plant.objects.filter(name__contains=request.GET["search"])
     else:
         plants = []
 

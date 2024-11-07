@@ -45,7 +45,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarCollapseItems">
 
                     <!-- Middle nav -->
-                    <ul class="gap-4 p-3 navbar-nav align-items-center f-quantico">
+                    <ul class="gap-4 p-3 navbar-nav align-items-center f-ubuntu">
                         <li class="nav-item">
                             <a class="linkHover {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}"
                                 href="{% url 'plants:plantsDisplayView' 'all' %}">All plants</a>
@@ -83,7 +83,7 @@
     </main>
 
     <div class="container">
-        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top f-quantico">
+        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top f-ubuntu">
             <div class="col mb-3">
                 <a class="navbar-brand f-jockey gap-1 d-inline-flex" href="/">
                     <h1
@@ -104,7 +104,7 @@
 
             <div
                 class="col mb-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
-                <h4>Section</h4>
+                <h3 class="f-jockey">Section</h3>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#"
                             class="p-0 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">Home</a>
@@ -123,7 +123,7 @@
 
             <div
                 class="col mb-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
-                <h4>Section</h4>
+                <h3 class="f-jockey">Section</h3>
                 <ul class="nav flex-column ">
                     <li class="nav-item mb-2"><a href="#"
                             class="p-0 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">Home</a>
@@ -142,7 +142,7 @@
 
             <div
                 class="col mb-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext{% else %} lighttext {% endif %}">
-                <h4>Section</h4>
+                <h3 class="f-jockey">Section</h3>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#"
                             class="p-0 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">Home</a>

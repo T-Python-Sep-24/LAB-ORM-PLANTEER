@@ -5,8 +5,42 @@
 
 {% block content %}
 
-<section>
-
+<section class="container-lg text-center">
+    <h1
+        class="f-jockey m-4 lighttext {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% endif %}">
+        All plants
+    </h1>
+    <div class="row justify-content-center">
+        <div
+            class="col-md-8 f-quantico align-items-center justify-content-center gap-1 p-2 rounded-pill shadow text-bg-light {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-bg-dark {% endif %}">
+            <div class="container justify-content-center">
+                <h5
+                    class="f-jockey lighttitle {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktitle {% endif %}">
+                    Filter by:</h5>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center gap-2 p-2">
+                {% for value, label in categories %}
+                <a href="{% url 'plants:plantsDisplayView' value %}" class="border-2 px-2 rounded-pill text-decoration-none small tag hover
+                {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white{% else %} text-black{% endif %}
+                {% if value == selected %} {{value}}-tag {% endif %}">{{label}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Displaying plants -->
+        <div class="row mt-2 row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            {% for plant in plants %}
+            <div class="col {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
+                <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
+                    <img src="{{plant.image.url}}" class="w-100 h-image object-fit-cover rounded-3" />
+                    <a href="{% url 'plants:plantDetailsView' plant.id %}" class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">
+                        <h4 class="f-jockey {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">{{plant.name}}</h4>
+                    </a>
+                    <a href="{% url 'plants:plantsDisplayView' plant.category %}" class="{{plant.category}}-tag rounded-4 border-2 text-center text-decoration-none px-3{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}">{{plant.category}}</a>
+                    <p class="small">{{plant.about}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 </section>
 
 {% endblock %}
