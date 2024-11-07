@@ -52,7 +52,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="linkHover {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}"
-                                href="">Contact Us</a>
+                                href="{% url 'main:contactView' %}">Contact Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} btn-outline-light {% else %} btn-outline-dark {% endif %}"

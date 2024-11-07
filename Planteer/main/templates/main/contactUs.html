@@ -1,0 +1,72 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+<section class="container text-center f-ubuntu">
+    <h1 class="display-4 m-4 f-jockey {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {%else %} lighttext {% endif %}">
+        Contact Us
+    </h1>
+    <div class="row row-cols-1 row-cols-md-2 justify-content-between g-5">
+        <div class="col col-md-6 shadow rounded-3 py-3 px-4 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark darktext {% else %} bg-light lighttext {% endif %} opacity-90">
+            <form class="form-floating gap-2 mt-3 px-2 needs-validation text-center" action="{% url 'main:contactView' %}"
+                method="post" novalidate>
+                {% csrf_token %}
+                <span class="material-symbols-outlined p-2">
+                    chat
+                </span>
+                <p>
+                    Please write your message, and we will contact you as soon as possible.
+                </p>
+                <div class="d-flex justify-content-evenly gap-2">
+                    <div class="form-floating mb-3 flex-fill">
+                        <input type="text" class="form-control focus-ring focus-ring-success" placeholder="First Name.."
+                            name="fname" id="floatingName" required minlength="4" maxlength="256">
+                        <label for="floatingName" class="lighttext">First Name</label>
+                        <div class="invalid-feedback">
+                            Please enter a valid first name.
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3 flex-fill">
+                        <input type="text" class="form-control focus-ring focus-ring-success" placeholder="Last Name.."
+                            name="lname" id="floatingName" required minlength="4" maxlength="256">
+                        <label for="floatingName" class="lighttext">Last Name</label>
+                        <div class="invalid-feedback">
+                            Please enter a valid last name.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"
+                        name="email" required maxlength="254">
+                    <label for="floatingEmail" class="lighttext">Email address</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid email.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control focus-ring focus-ring-success" placeholder="Message.." name="message"
+                        id="floatingAbout" style="height: 100px" required></textarea>
+                    <label for="floatingAbout" class="lighttext">Message or comment</label>
+                    <div class="invalid-feedback">
+                        Please write your message or comment.
+                    </div>
+                </div>
+                <div class="d-flex flex-row justify-content-center">
+                    <button
+                        class="col-6 btn border-2 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} btn-outline-light {% else %} btn-outline-dark {% endif %}"
+                        type="submit">Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col col-md-6">
+            <img src="{% static 'images/intropic.jpg' %}" class="w-100 h-100 object-fit-cover rounded-3 shadow" />
+        </div>
+    </div>
+</section>
+
+{% endblock %}

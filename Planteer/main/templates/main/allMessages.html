@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+<section class="container text-center f-ubuntu">
+    <h1 class="display-4 m-4 f-jockey {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {%else %} lighttext {% endif %}">
+        All Messages
+    </h1>
+    <div class="row row-cols-1 row-cols-md-3 justify-content-between g-5">
+        <div class="col col-md-4">
+            
+        </div>
+    </div>
+</section>
+
+{% endblock %}

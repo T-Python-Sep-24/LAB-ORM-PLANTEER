@@ -15,8 +15,7 @@ def newPlantView(request:HttpRequest):
         plantData = PlantForm(request.POST, request.FILES)
         if plantData.is_valid():
             plantData.save()
-        else:
-            print(plantData.errors)
+            
         response = redirect('main:homeView')
 
     return response
