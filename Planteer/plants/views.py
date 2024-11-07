@@ -69,7 +69,7 @@ def deletePlantView(request: HttpRequest, plantid:int):
 #Filter by category or display all view
 def plantsDisplayView(request: HttpRequest, filterBy):
 
-    plants = Plant.objects.filter(category=filterBy).order_by('createdAt') if filterBy != "all" else Plant.objects.all().order_by('createdAt')
+    plants = Plant.objects.filter(category=filterBy).order_by('-createdAt') if filterBy != "all" else Plant.objects.all().order_by('-createdAt')
     if "isEdible" in request.GET and request.GET["isEdible"] == "true":
         plants = plants.filter(isEdible=True)
     elif "isEdible" in request.GET and request.GET["isEdible"] == "false":

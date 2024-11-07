@@ -22,7 +22,6 @@ def contactView(request: HttpRequest):
         contactData = ContactForm(request.POST)
         if contactData.is_valid():
             contactData.save()
- 
 
     return response
 
