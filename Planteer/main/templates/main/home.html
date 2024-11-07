@@ -39,16 +39,21 @@
     </div>
     <div class="row mt-2 row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         {% for plant in plants %}
-        <div class="col {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %}">
-            <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2 rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark {% else %} bg-light {% endif %}">
-                <img src="{{plant.image.url}}" class="w-100 h-image object-fit-cover rounded-3" />
-                <a href="{% url 'plants:plantDetailsView' plant.id %}" class="{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darklinks {% else %} lightlinks {% endif %}">
-                    <h4 class="f-jockey {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-light {% else %} text-black {% endif %}">{{plant.name}}</h4>
-                </a>
-                <a href="{% url 'plants:plantsDisplayView' plant.category %}" class="{{plant.category}}-tag rounded-4 border-2 text-center text-decoration-none px-3{% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}">{{plant.category}}</a>
-                <p class="small text-start">{{plant.about}}</p>
+            <div class="col f-ubuntu">
+                <div class="card p-2 my-2 text-start shadow rounded-3 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-bg-dark {% else %} text-bg-light {% endif %}" style="height: 33rem;">
+                    <img src="{{plant.image.url}}" class="card-img-top rounded-3 h-image "/>
+                    <div class="card-body d-flex flex-column gap-1 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}">
+                        <a href="{% url 'plants:plantDetailsView' plant.id %}" class="card-title fs-3 f-jockey text-decoration-none my-1">{{plant.name}}</a>
+                        <a href="{% url 'plants:plantsDisplayView' plant.category %}" class="{{plant.category}}-tag rounded-4 border-2 text-center text-decoration-none px-1 mb-2 small {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}" style="max-width: fit-content;">
+                            {{plant.category}}
+                        </a>
+                        <p class="card-text small fw-medium {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {% else %} lighttext {% endif %} ">
+                            <span class="fw-medium fs-6 {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} text-white {% else %} text-black {% endif %}">About: </span>
+                            {{plant.about}}
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 </section>

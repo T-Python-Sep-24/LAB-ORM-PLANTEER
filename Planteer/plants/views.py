@@ -16,7 +16,7 @@ def newPlantView(request:HttpRequest):
         if plantData.is_valid():
             plantData.save()
             
-        response = redirect('main:plantsDisplayView' 'all')
+        response = redirect('plants:plantsDisplayView', 'all')
 
     return response
 
@@ -49,7 +49,7 @@ def updatePlantView(request: HttpRequest, plantid:int):
             plantData = PlantForm(request.POST, request.FILES, instance=plant)
             if plantData.is_valid():
                 plantData.save()
-            print(plantData.errors)
+
             response = redirect('plants:plantDetailsView', plantid=plant.id)
 
     return response
