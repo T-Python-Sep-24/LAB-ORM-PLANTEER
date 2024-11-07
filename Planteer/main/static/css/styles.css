@@ -130,3 +130,12 @@
     transform: scale(1.1);
     transition: all 0.2s;
 }
+
+/* Contact styling */
+.filter-dark{
+    filter: invert(90%) sepia(7%) saturate(848%) hue-rotate(41deg) brightness(91%) contrast(92%);
+}
+
+.filter-light{
+    filter: invert(28%) sepia(21%) saturate(718%) hue-rotate(40deg) brightness(94%) contrast(89%);
+}

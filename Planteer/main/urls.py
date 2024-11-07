@@ -6,6 +6,7 @@ app_name = "main"
 urlpatterns = [
     path("", views.homeView, name="homeView"),
     path("contact/", views.contactView, name="contactView"),
+    path("contact/messages", views.allMessagesView, name="allMessagesView"),
     path("mode/<mode>/", views.modeView, name="modeView"),
     path("plantNotFound/", views.notFoundView, name="notFoundView"),
 ]

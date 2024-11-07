@@ -9,10 +9,25 @@
     <h1 class="display-4 m-4 f-jockey {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} darktext {%else %} lighttext {% endif %}">
         All Messages
     </h1>
-    <div class="row row-cols-1 row-cols-md-3 justify-content-between g-5">
-        <div class="col col-md-4">
-            
+    <div class="row row-cols-1 row-cols-md-2 justify-content-between g-5">
+        {% for msg in messages %}
+        <div class="col col-md-6 col-lg-4 d-flex gap-3 shadow rounded-2 px-2 py-4 justify-content-around text-start {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} bg-dark text-light {%else %} bg-light text-dark {% endif %}">
+            <div class="">
+                <img src="{% static 'images/profilepic.svg' %}" class="w-100 h-100 object-fit-fill {% if 'mode' in request.COOKIES and request.COOKIES.mode == 'dark' %} filter-light {%else %} filter-dark {% endif %}" />
+            </div>
+            <div class="">
+                <p class="fs-5 my-1">
+                    {{msg.fname}} {{msg.lname}} 
+                </p>
+                <p class="my-0">
+                    {{msg.message}} 
+                </p>
+                <p class="small my-0">
+                    Sent at: {{msg.createdAt}} 
+                </p>
+            </div>
         </div>
+        {% endfor %}
     </div>
 </section>
 

@@ -29,7 +29,7 @@ def contactView(request: HttpRequest):
 #All messages page
 def allMessagesView(request: HttpRequest):
     messages = Contact.objects.all().order_by("-createdAt")
-    response = render(request, 'main/allMessages.html')
+    response = render(request, 'main/allMessages.html', context={'messages': messages})
 
     return response
 
