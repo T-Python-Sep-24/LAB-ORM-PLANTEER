@@ -3,7 +3,6 @@ from django.http import HttpRequest
 from plants.models import Plant
 from .forms import PlantForm
 from django.core.paginator import Paginator
-from django import template
 
 #New plant view 
 def newPlantView(request:HttpRequest):
@@ -78,7 +77,7 @@ def plantsDisplayView(request: HttpRequest, filterBy):
     elif "isEdible" in request.GET and request.GET["isEdible"] == "false":
         plants = plants.filter(isEdible=False)
 
-    paginator = Paginator(plants, 6)
+    paginator = Paginator(plants, 3)
     pageNumber = request.GET.get('page', 1)
     page_obj = paginator.get_page(pageNumber)
 
@@ -99,17 +98,8 @@ def searchPlantsView(request:HttpRequest):
     else:
         plants = []
 
-    paginator = Paginator(plants, 6)
+    paginator = Paginator(plants, 3)
     pageNumber = request.GET.get('page', 1)
     page_obj = paginator.get_page(pageNumber)
 
     return render(request, "plants/searchPlants.html", {"page_obj" : page_obj, 'categories': Plant.Categories.choices})
-
-register = template.Library()
-
-@register.simple_tag(takes_context=True)
-def query_transform(context, **kwargs):
-    query = context['request'].GET.copy()
-    for k, v in kwargs.items():
-        query[k] = v
-    return query.urlencode()
