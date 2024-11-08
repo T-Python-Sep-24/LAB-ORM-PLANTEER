@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from plants.models import Plant
 from .forms import PlantForm
+from django.core.paginator import Paginator
+from django import template
 
 #New plant view 
 def newPlantView(request:HttpRequest):
@@ -29,7 +31,7 @@ def plantDetailsView(request: HttpRequest, plantid:int):
     except Exception:
         response = render(request, '404.html')
     else:
-        similarPlants = Plant.objects.filter(category=plant.category)
+        similarPlants = Plant.objects.filter(category=plant.category)[0:3]
         response = render(request, 'plants/plantDetails.html', context={"plant":plant, "similarPlants": similarPlants})
     
     return response
@@ -70,18 +72,24 @@ def deletePlantView(request: HttpRequest, plantid:int):
 def plantsDisplayView(request: HttpRequest, filterBy):
 
     plants = Plant.objects.filter(category=filterBy).order_by('-createdAt') if filterBy != "all" else Plant.objects.all().order_by('-createdAt')
+
     if "isEdible" in request.GET and request.GET["isEdible"] == "true":
         plants = plants.filter(isEdible=True)
     elif "isEdible" in request.GET and request.GET["isEdible"] == "false":
         plants = plants.filter(isEdible=False)
 
-    response = render(request, 'plants/allPlants.html', context={'plants': plants, 'categories': Plant.Categories.choices, 'selected': filterBy})
+    paginator = Paginator(plants, 6)
+    pageNumber = request.GET.get('page', 1)
+    page_obj = paginator.get_page(pageNumber)
+
+
+    response = render(request, 'plants/allPlants.html', context={'categories': Plant.Categories.choices, 'selected': filterBy, 'page_obj': page_obj })
     return response
 
 def searchPlantsView(request:HttpRequest):
 
     if "search" in request.GET and len(request.GET["search"]) >= 3:
-        plants = Plant.objects.filter(name__contains=request.GET["search"])
+        plants = Plant.objects.filter(name__contains=request.GET["search"]).order_by('-createdAt')
         if "category" in request.GET:
             plants = plants.filter(category=request.GET['category'])
         if "isEdible" in request.GET and request.GET["isEdible"] == "true":
@@ -91,4 +99,17 @@ def searchPlantsView(request:HttpRequest):
     else:
         plants = []
 
-    return render(request, "plants/searchPlants.html", {"plants" : plants, 'categories': Plant.Categories.choices})
+    paginator = Paginator(plants, 6)
+    pageNumber = request.GET.get('page', 1)
+    page_obj = paginator.get_page(pageNumber)
+
+    return render(request, "plants/searchPlants.html", {"page_obj" : page_obj, 'categories': Plant.Categories.choices})
+
+register = template.Library()
+
+@register.simple_tag(takes_context=True)
+def query_transform(context, **kwargs):
+    query = context['request'].GET.copy()
+    for k, v in kwargs.items():
+        query[k] = v
+    return query.urlencode()
