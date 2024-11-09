@@ -1,0 +1,173 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* Base Styling */
+.f-jockey{
+    font-family: 'Jockey One', sans-serif;
+}
+
+.f-ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.lightbody {
+    background-image: linear-gradient(rgb(213, 225, 194), rgb(167, 186, 139));
+}
+
+.darkbody {
+    background-image: linear-gradient(rgb(47, 65, 36), rgb(76, 92, 53));
+}
+
+.lighttext {
+    color: rgb(70, 81, 50);
+}
+
+.darktext {
+    color: rgb(195, 211, 169);
+}
+
+.lightlinks {
+    text-decoration: none;
+    font-size: 1.1em;
+    color: rgb(82, 95, 60);
+}
+
+.darklinks {
+    text-decoration: none;
+    font-size: 1.1em;
+    color: rgb(187, 205, 159);
+}
+
+.lightlinks:hover,
+.darklinks:hover {
+    transform: scale(1.1);
+    font-size: 1.3em;
+    transition: all 0.2s;
+}
+
+.activeicondark {
+    background: rgba(77, 88, 60, 0.5);
+    color: rgb(187, 205, 159);
+}
+
+.activeiconlight {
+    background-color: rgba(187, 205, 159, 0.5);
+    color: rgb(100, 115, 78);
+}
+
+.logohover:hover {
+    opacity: 0.8;
+    font-size: 1.7em;
+    transition: all 0.3s;
+}
+
+.largetext {
+    font-size: 1.3em;
+}
+
+/* Home Styling */
+.introimg {
+    background-image: url('../images/pic2.jpg');
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    min-height: 80%;
+}
+
+.titlecolor {
+    color: rgb(48, 57, 28);
+}
+
+.welcomebg {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.opacity-90 {
+    opacity: 0.9;
+}
+
+.h-image {
+    max-height: 200px;
+}
+
+.h-col {
+    max-height: 75%;
+}
+
+/* Category tags styling */
+
+.tag {
+    background: rgba(105, 105, 105, 0.5);
+    border: solid dimgray;
+}
+
+.herbs-tag {
+    background: rgba(144, 207, 108, 0.5);
+    border: solid rgb(144, 207, 108);
+}
+
+.shrubs-tag {
+    background: rgba(196, 207, 108, 0.5);
+    border: solid rgb(196, 207, 108);
+}
+
+.trees-tag {
+    background: rgba(167, 136, 85, 0.5);
+    border: solid rgb(167, 136, 85);
+}
+
+.creepers-tag {
+    background: rgba(72, 140, 71, 0.5);
+    border: solid rgb(72, 140, 71);
+}
+
+.climbers-tag {
+    background: rgba(217, 202, 101, 0.5);
+    border: solid rgb(217, 202, 101);
+}
+
+.hover:hover {
+    transform: scale(1.1);
+    transition: all 0.2s;
+}
+
+/* Contact styling */
+.filter-dark{
+    filter: invert(90%) sepia(7%) saturate(848%) hue-rotate(41deg) brightness(91%) contrast(92%);
+}
+
+.filter-light{
+    filter: invert(28%) sepia(21%) saturate(718%) hue-rotate(40deg) brightness(94%) contrast(89%);
+}
+
+/* 404 styling */
+.four {
+    fill: none;
+    stroke: rgb(148, 167, 118);
+    stroke-width: 12;
+    stroke-dasharray: 200 100;
+}
+
+.zero {
+    fill: none;
+    stroke: rgb(148, 167, 118);
+    stroke-width: 12;
+    stroke-dasharray: 200 100;
+}
+
+.animate {
+    -webkit-animation: swirls 2s linear infinite;
+    -moz-animation: swirls 2s linear infinite;
+    -o-animation: swirls 2s linear infinite;
+    animation: swirls 2s linear infinite;
+}
+
+@keyframes swirls {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: 300;
+    }
+}
